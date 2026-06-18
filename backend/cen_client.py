@@ -16,8 +16,9 @@ async def get_costo_marginal_cen(fecha: str):
     }
 
     params = {
-        "fecha": fecha,
-        "codigoBarraStr": BARRA_QUILLAGUA,
+    "startDate": fecha,
+    "endDate": fecha,
+    "bar_transf": BARRA_QUILLAGUA,
     }
 
     async with httpx.AsyncClient(timeout=20) as client:
