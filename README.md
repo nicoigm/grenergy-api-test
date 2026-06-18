@@ -167,12 +167,18 @@ http://localhost:8501
 ```
 
 ## Manejo de errores
-La aplicacion implementa un manejo controlado de errores provinientes de servicios externos. Cuando la integación con CEN no responde correctamente, la API devuelve respuestas controladas para evitar fallas en backend y en el dashboard.
-json{
+La aplicación implementa un manejo controlado de errores provenientes de servicios externos.
+Cuando la integración con el Coordinador Eléctrico Nacional (CEN) no responde correctamente, la API devuelve respuestas controladas para evitar fallas tanto en el backend como en el dashboard.
+
+### Ejemplo de respuesta controlada
+```json
+{
   "source": "CEN",
   "status": 403,
   "error": "Authentication parameters missing"
 }
+```
+Esta estrategia permite mantener la disponibilidad de la solución, facilitar el diagnóstico y entregar retroalimentación.
 
 ## ⚠️ Análisis de la integración con el CEN
 La integración fue implementada siguiendo la documentación Swagger oficial del CEN. Sin embargo, durante las pruebas se encontró que todos los escenarios evaluados retornan consistentemente:
