@@ -62,57 +62,109 @@ grenergy-api-test
 ```
 
 ## Endpoints disponibles
-GET /health — Estado de la API - Útil para verificar que el servicio está corriendo.
+
+### GET /health
+Estado de la API. Permite verificar que el servicio se encuentra operativo.
+
 ```json
 {
   "status": "ok"
 }
 ```
 
-GET /costo-marginal — Costo Marginal
-Parámetro: fecha
-Tipo: string
-Descripción: Fecha de consulta
-GET /costo-marginal?fecha=2026-06-18
+### GET /costo-marginal
+Obtiene información de costo marginal para una fecha determinada.
 
-GET /medidas — Medidas / Generación
-Parámetro -> fecha_inicio -> Tipo string -> Fecha Inicial
-Parámetro -> fecha_fin -> Tipo string -> Fecha final
+**Parámetros**
+
+| Parámetro | Tipo | Descripción |
+|-----------|------|-------------|
+| fecha | string | Fecha de consulta |
+
+**Ejemplo**
+
+```http
+GET /costo-marginal?fecha=2026-06-18
+```
+
+### GET /medidas
+Obtiene información de medidas/generación para un rango de fechas.
+
+**Parámetros**
+
+| Parámetro | Tipo | Descripción |
+|-----------|------|-------------|
+| fecha_inicio | string | Fecha inicial |
+| fecha_fin | string | Fecha final |
+
+**Ejemplo**
+
+```http
 GET /medidas?fecha_inicio=2026-06-01&fecha_fin=2026-06-18
+```
 
 ## 🔐 Autenticación
 Los endpoints de negocio requieren una API Key en el header de cada solicitud:
 X-API-Key: <api-key>
 
 ## Instalación y ejecución local
-1. Crear y activar el entorno virtual
+
+### 1. Crear entorno virtual
 ```bash
 python -m venv venv
 ```
-Windows:
-bashvenv\Scripts\activate
-macOS:
-bashsource venv/bin/activate
 
-2. Instalar dependencias
+### 2. Activar entorno virtual
+#### Windows
+```bash
+venv\Scripts\activate
+```
+
+#### macOS / Linux
+```bash
+source venv/bin/activate
+```
+
+### 3. Instalar dependencias
 Desde la carpeta backend:
+
+```bash
 pip install -r requirements.txt
+```
 
-3. Configurar variables de entorno
-Crear un archivo .env dentro de la carpeta backend:
-envMY_API_KEY=<tu-api-key>
+### 4. Configurar variables de entorno
+Crear un archivo `.env` dentro de la carpeta `backend`:
 
-CEN_API_KEY_SIPUB=tu-<api-key-cen>
+```env
+MY_API_KEY=<tu-api-key>
+
+CEN_API_KEY_SIPUB=<tu-api-key-cen>
 CEN_API_KEY_MEDIDAS=<tu-api-key-cen>
+```
 
-4. Levantar el backend
-bashuvicorn main:app --reload
-Swagger local disponible en: http://127.0.0.1:8000/docs
+### 5. Levantar el backend
+```bash
+uvicorn main:app --reload
+```
 
-5. Levantar el dashboard
+Swagger local disponible en:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+### 6. Levantar el dashboard
 Desde la raíz del proyecto:
-bashstreamlit run dashboard/app.py
-Dashboard local disponible en: http://localhost:8501
+
+```bash
+streamlit run dashboard/app.py
+```
+
+Dashboard local disponible en:
+
+```text
+http://localhost:8501
+```
 
 ## Manejo de errores
 La aplicacion implementa un manejo controlado de errores provinientes de servicios externos. Cuando la integación con CEN no responde correctamente, la API devuelve respuestas controladas para evitar fallas en backend y en el dashboard.
@@ -122,7 +174,7 @@ json{
   "error": "Authentication parameters missing"
 }
 
-## ⚠️ Observaciones sobre la integración con el CEN
+## ⚠️ Análisis de la integración con el CEN
 La integración fue implementada siguiendo la documentación Swagger oficial del CEN. Sin embargo, durante las pruebas se encontró que todos los escenarios evaluados retornan consistentemente:
 403 Authentication parameters missing
 Para descartar errores propios, se realizaron pruebas exhaustivas:
