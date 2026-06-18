@@ -13,11 +13,13 @@ Esto incluye:
 
 
 ## 🚀 Links de acceso rápido
-API REST https://grenergy-api-test.onrender.com/health
-Documentación Swagger https://grenergy-api-test.onrender.com/docs
-Dashboard https://grenergy-api-test-wlu8jbkerapppsyadnepaih.streamlit.app/
+- **API REST:** https://grenergy-api-test.onrender.com/health
+- **Swagger:** https://grenergy-api-test.onrender.com/docs
+- **Dashboard:** https://grenergy-api-test-wlu8jbkerapppsyadnepaih.streamlit.app/
 
 ## Arquitectura
+
+```text
 Dashboard (Streamlit)
         │
         ▼
@@ -31,8 +33,10 @@ Cliente de Integración CEN
         │
         ▼
 Servicios Externos del Coordinador Eléctrico Nacional
+```
 
 ## Estructura del proyecto
+```text
 grenergy-api-test
 │
 ├── .devcontainer
@@ -55,6 +59,7 @@ grenergy-api-test
 │
 ├── .gitignore
 └── README.md
+```
 
 ## Endpoints disponibles
 GET /health — Estado de la API - Útil para verificar que el servicio está corriendo.
