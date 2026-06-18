@@ -1,8 +1,9 @@
 import streamlit as st
 import requests
-from PIL import Image
+from pathlib import Path
+import base64
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = "https://grenergy-api-test.onrender.com"
 API_KEY = "clave-secreta-grenergy-2024"
 
 st.set_page_config(
@@ -92,18 +93,22 @@ st.markdown(
 # Logo
 # -----------------------------------------
 
-logo = Image.open("dashboard/assets/grenergy_logo.png")
+BASE_DIR = Path(__file__).resolve().parent
+LOGO_PATH = BASE_DIR / "assets" / "grenergy_logo.png"
 
-st.markdown(
-    """
-    <div style="display:flex; justify-content:center; align-items:center;">
-        <img src="data:image/png;base64,{}" width="380">
-    </div>
-    """.format(
-        __import__("base64").b64encode(open("dashboard/assets/grenergy_logo.png", "rb").read()).decode()
-    ),
-    unsafe_allow_html=True
-)
+if LOGO_PATH.exists():
+    logo_base64 = base64.b64encode(LOGO_PATH.read_bytes()).decode()
+
+    st.markdown(
+        f"""
+        <div style="display:flex; justify-content:center; align-items:center;">
+            <img src="data:image/png;base64,{logo_base64}" width="380">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+else:
+    st.warning("Logo no disponible en el entorno de despliegue.")
 
 st.markdown(
     """
