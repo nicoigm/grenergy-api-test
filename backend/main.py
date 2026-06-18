@@ -1,13 +1,14 @@
-from fastapi import FastAPI, HTTPException, Security
-from fastapi.security.api_key import APIKeyHeader
+from fastapi import FastAPI, Security
 from fastapi.middleware.cors import CORSMiddleware
-import httpx
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
+from auth import verify_api_key
+from cen_client import get_costo_marginal_cen, get_medidas_cen
 
-app = FastAPI(title="Grenergy API")
+app = FastAPI(
+    title="Grenergy API",
+    description="API REST para exponer datos del proyecto Quillagua desde CEN.",
+    version="0.1.0",
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -16,17 +17,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MY_API_KEY = os.getenv("MY_API_KEY")
-api_key_header = APIKeyHeader(name="X-API-Key")
-
-def verify_api_key(key: str = Security(api_key_header)):
-    if key != MY_API_KEY:
-        raise HTTPException(status_code=403, detail="API Key inválida")
-    return key
-
-CEN_KEY_SIPUB = os.getenv("CEN_API_KEY_SIPUB")
-CEN_KEY_MEDIDAS = os.getenv("CEN_API_KEY_MEDIDAS")
-
 
 @app.get("/health")
 def health():
@@ -34,35 +24,20 @@ def health():
 
 
 @app.get("/costo-marginal")
-async def get_costo_marginal(fecha: str, key: str = Security(verify_api_key)):
-    url = "https://sipub.api.coordinador.cl/costo-marginal-online/v4/findByDate"
-    headers = {
-        "apikey": CEN_KEY_SIPUB,
-        "Accept": "application/json"
-    }
-    params = {
-        "fecha": fecha,
-        "codigoBarraStr": "FRONTERA______220"
-    }
-    print("HEADER ENVIADO:")
-    print(headers)
-    async with httpx.AsyncClient(verify=False) as client:
-        r = await client.get(url, headers=headers, params=params)
-        return {"status": r.status_code, "body": r.text}
+async def costo_marginal(
+    fecha: str,
+    key: str = Security(verify_api_key)
+):
+    return await get_costo_marginal_cen(fecha)
 
 
 @app.get("/medidas")
-async def get_medidas(fecha_inicio: str, fecha_fin: str, key: str = Security(verify_api_key)):
-    url = "https://medidas.api.coordinador.cl/medidas-v2/measurement"
-    headers = {
-        "Ocp-Apim-Subscription-Key": CEN_KEY_MEDIDAS,
-        "Accept": "application/json"
-    }
-    params = {
-        "measurePointId": "FRONTERA_220_J7-J8_QUI",
-        "startDate": fecha_inicio,
-        "endDate": fecha_fin
-    }
-    async with httpx.AsyncClient(verify=False) as client:
-        r = await client.get(url, headers=headers, params=params)
-        return {"status": r.status_code, "body": r.text}
+async def medidas(
+    fecha_inicio: str,
+    fecha_fin: str,
+    key: str = Security(verify_api_key)
+):
+    return await get_medidas_cen(
+        fecha_inicio,
+        fecha_fin,
+    )
