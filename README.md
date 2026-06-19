@@ -222,8 +222,7 @@ Si esto ocurre, basta con volver a ejecutar la consulta y la aplicación deberí
 - FastAPI
 - Streamlit
 - HTTPX
-- Python
-- Dotenv
+- Python-dotenv
 - Uvicorn
 - Git
 - GitHub
