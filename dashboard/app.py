@@ -153,7 +153,7 @@ with col_boton:
     st.write("")
     st.write("")
     consultar_costo = st.button(
-        "Consultar costo marginal",
+        "Consultar",
         use_container_width=True
     )
 
@@ -253,7 +253,7 @@ with col_boton_medidas:
     st.write("")
     st.write("")
     consultar_medidas = st.button(
-        "Consultar medidas",
+        "Consultar",
         use_container_width=True
     )
 
