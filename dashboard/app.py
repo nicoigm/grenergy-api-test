@@ -137,7 +137,7 @@ st.markdown(
 # -----------------------------------------
 
 st.markdown(
-    '<p class="section-title">Costo Marginal Online</p>',
+    '<p class="section-title">Costo Marginal</p>',
     unsafe_allow_html=True
 )
 
@@ -152,10 +152,11 @@ with col_fecha:
 with col_boton:
     st.write("")
     st.write("")
-    consultar_costo = st.button(
-        "Consultar",
-        use_container_width=True
-    )
+consultar_costo = st.button(
+    "Consultar",
+    key="btn_consultar_costo",
+    use_container_width=True
+)
 
 if consultar_costo:
 
@@ -252,10 +253,11 @@ with col_fin:
 with col_boton_medidas:
     st.write("")
     st.write("")
-    consultar_medidas = st.button(
-        "Consultar",
-        use_container_width=True
-    )
+consultar_medidas = st.button(
+    "Consultar",
+    key="btn_consultar_medidas",
+    use_container_width=True
+)
 
 if consultar_medidas:
 
