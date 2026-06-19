@@ -145,9 +145,6 @@ fecha = st.date_input(
     key="fecha_costo_marginal"
 )
 
-with col_boton:
-    st.write("")
-    st.write("")
 consultar_costo = st.button(
     "Consultar",
     key="btn_consultar_costo",
