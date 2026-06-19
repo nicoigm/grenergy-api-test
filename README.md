@@ -196,6 +196,12 @@ Para descartar errores propios, se realizaron pruebas exhaustivas:
 Se concluyó que la integración sí se comunica correctamente con el servicio externo, pero al parecer existe un requisito de autenticación adicional que no está documentado o que requiere una configuración específica del proveedor.
 Mientras tanto, la solución funciona con un manejo controlado de errores, a nivel de API y dashboard. Se encuentra lista para conectarse en cuanto se cuente con el mecanismo de autenticación correcto.
 
+## Consideración sobre el despliegue
+
+La API está desplegada en Render utilizando el plan gratuito. En algunos casos, después de un período de inactividad, el primer request puede tardar algunos segundos mientras el servicio se reactiva.
+
+Si esto ocurre, basta con volver a ejecutar la consulta y la aplicación debería responder normalmente.
+
 ## Decisiones de diseño
 
 - FastAPI por su simplicidad, rendimiento y documentación automática con OpenAPI.
