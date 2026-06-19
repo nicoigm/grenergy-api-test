@@ -125,7 +125,7 @@ st.markdown(
 st.markdown(
     """
     <div class="info-box">
-    Consulta información de Costo Marginal y Medidas asociadas al proyecto Quillagua.
+    Panel de consulta para información asociada al proyecto Quillagua.
     </div>
     """,
     unsafe_allow_html=True
