@@ -126,9 +126,7 @@ st.markdown(
 st.markdown(
     """
     <div class="info-box">
-    La información es consultada desde una API REST desarrollada en FastAPI,
-    protegida mediante API Key e integrada con servicios del Coordinador
-    Eléctrico Nacional (CEN).
+    Consulta información de Costo Marginal y Medidas asociadas al proyecto Quillagua.
     </div>
     """,
     unsafe_allow_html=True
@@ -331,7 +329,6 @@ st.markdown(
     """
     <div class="footer">
         <strong>Prueba Técnica Grenergy</strong><br>
-        API REST desarrollada con FastAPI · Dashboard desarrollado con Streamlit<br>
         Proyecto Quillagua
     </div>
     """,
