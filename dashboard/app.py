@@ -241,9 +241,6 @@ with col_fin:
         key="fecha_fin"
     )
 
-with col_boton_medidas:
-    st.write("")
-    st.write("")
 consultar_medidas = st.button(
     "Consultar",
     key="btn_consultar_medidas",
