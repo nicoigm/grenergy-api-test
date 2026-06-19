@@ -115,8 +115,7 @@ st.markdown(
     <div style="text-align:center;">
         <p class="main-title">🌵⚡ Proyecto Quillagua ⚡🌵</p>
         <p class="subtitle">
-            Dashboard de prueba para consulta de Costo Marginal Online y
-            Medidas.
+            Consulta información de Costo Marginal y Medidas asociadas al proyecto Quillagua
         </p>
     </div>
     """,
@@ -141,13 +140,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-col_fecha, col_boton = st.columns([3, 1])
-
-with col_fecha:
-    fecha = st.date_input(
-        "Fecha",
-        key="fecha_costo_marginal"
-    )
+fecha = st.date_input(
+    "Fecha",
+    key="fecha_costo_marginal"
+)
 
 with col_boton:
     st.write("")
@@ -234,9 +230,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-col_inicio, col_fin, col_boton_medidas = st.columns(
-    [1.5, 1.5, 1]
-)
+col_inicio, col_fin = st.columns(2)
 
 with col_inicio:
     fecha_inicio = st.date_input(
